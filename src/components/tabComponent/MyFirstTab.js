@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EntryList from '../itemComponent/entryListComponent';
+import AssetList from '../itemComponent/assetListComponent';
 
 export default class MyFirstTab extends Component {
 	constructor(props) {
@@ -8,7 +9,7 @@ export default class MyFirstTab extends Component {
 
 			activeTab: 'entries',
 			entries:[],
-			beacons: [],
+			assets: [],
 			// tabShowing: 'sensors',
 			// sensorData: [{
 			// 	name: 'sensor 1',
@@ -20,8 +21,8 @@ export default class MyFirstTab extends Component {
 			// }],
 		};	
 		
-		this.loadSensorsData = this.loadSensorsData.bind(this);
-		this.loadBeaconData = this.loadBeaconData.bind(this);
+		this.loadEntriesData = this.loadEntriesData.bind(this);
+		this.loadAssetsData = this.loadAssetsData.bind(this);
 	}
 
 	componentDidMount() {
@@ -29,37 +30,53 @@ export default class MyFirstTab extends Component {
 	}
 
 	fetchEntryData() {
-		fetch('localhost:4000/spaces/yadj1kx9rmg0/entries').then(response => {
-			this.setState({
+		fetch('/spaces/yadj1kx9rmg0/entries').then(response => {
+			response.json().then(entries => {
+				this.setState({
 				activeTab: 'entries', 
-				entries: response.json(),
+				entries: entries,
+				});
 			});
 		});
 	}
 
-	loadSensorsData() {
+	loadEntriesData() {
 		this.fetchEntryData();
 	}
 
-	loadBeaconData() {
-		this.setState({
-			activeTab: 'beacon',
+	fetchAssetData() {
+		fetch('/spaces/yadj1kx9rmg0/assets').then(response => {
+			response.json().then(assets => {
+				this.setState({
+				activeTab: 'assets', 
+				assets: assets,
+				});
+			});
 		});
+	}
+
+	loadAssetsData() {
+		// this.setState({
+		// 	activeTab: 'assets',
+		// });
+		this.fetchAssetData();
 	}
 
 	renderData() {
 		if (this.state.activeTab === 'entries'){
 			return (<EntryList entries={this.state.entries} />);
 		}
-		// return (<BeaconList beacons={this.state.beacons}); 
+		if (this.state.activeTab === 'assets') {
+			return (<AssetList assets={this.state.assets} />);
+		} 
 	}
 	
 	render() {
 		return (
 			<div>
 				<header>
-					<button onClick={this.loadSensorsData}>Entries</button>
-					<button onClick={this.loadBeaconData}>Beacon</button>
+					<button onClick={this.loadEntriesData}>Entries</button>
+					<button onClick={this.loadAssetsData}>Assets</button>
 				</header>
 				{this.renderData()}
 			</div>	
@@ -67,7 +84,7 @@ export default class MyFirstTab extends Component {
 	}
 }
 
-	// loadSensorsData() {
+	// loadEntriesData() {
 	// 	this.setState({
 	// 		tabShowing: 'entries',
 	// 	});
@@ -92,7 +109,7 @@ export default class MyFirstTab extends Component {
 	// 	return (
 	// 		<div>
 	// 			<header>
-	// 				<button onClick={this.loadSensorsData}>Sensors</button>
+	// 				<button onClick={this.loadEntriesData}>Sensors</button>
 	// 				<button onClick={this.loadBeaconData}>Beacon</button>
 	// 			</header>
 	// 			<table>

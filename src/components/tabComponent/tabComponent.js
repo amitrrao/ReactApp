@@ -2,15 +2,15 @@ import React from 'react';
 import MyFirstTab from './MyFirstTab'
 
 export let tabs = [{
-  name: 'My First Tab',
+  name: 'My First Space',
   content: <MyFirstTab />
 }, {
-  name: 'My Second Tab',
-  content: 'Content for 2'
+  name: 'My Second Space',
+  content: 'Not Availabe'
 
 }, {
-  name: 'My Third Tab',
-  content: 'Content for 3'
+  name: 'My Third Space',
+  content: 'Not Availabe'
 }];
 
 export const App = (props) => {
