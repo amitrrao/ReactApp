@@ -6,11 +6,11 @@ export let tabs = [{
   content: <MyFirstTab />
 }, {
   name: 'My Second Space',
-  content: 'Not Available'
+  content: 'Not Availabe'
 
 }, {
   name: 'My Third Space',
-  content: 'Not Available'
+  content: 'Not Availabe'
 }];
 
 export const App = (props) => {
