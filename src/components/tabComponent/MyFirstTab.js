@@ -10,15 +10,6 @@ export default class MyFirstTab extends Component {
 			activeTab: 'entries',
 			entries:[],
 			assets: [],
-			// tabShowing: 'sensors',
-			// sensorData: [{
-			// 	name: 'sensor 1',
-			// 	data: 'Some data',
-			// }],
-			// beaconData: [{
-			// 	name: 'beacon 1',
-			// 	data: 'beacon data',
-			// }],
 		};	
 		
 		this.loadEntriesData = this.loadEntriesData.bind(this);
@@ -27,6 +18,18 @@ export default class MyFirstTab extends Component {
 
 	componentDidMount() {
 		this.fetchEntryData();
+	}
+
+	// Fetch methods that call the REST API
+
+	fetchSpaceData() {
+		fetch('/spaces/yadj1kx9rmg0/').then(response => {
+			response.json().then(spaces => {
+				this.setState({
+					spaces: spaces,
+				});
+			});
+		});
 	}
 
 	fetchEntryData() {
@@ -40,10 +43,6 @@ export default class MyFirstTab extends Component {
 		});
 	}
 
-	loadEntriesData() {
-		this.fetchEntryData();
-	}
-
 	fetchAssetData() {
 		fetch('/spaces/yadj1kx9rmg0/assets').then(response => {
 			response.json().then(assets => {
@@ -55,11 +54,32 @@ export default class MyFirstTab extends Component {
 		});
 	}
 
+	// Load methods that calls the fetch method().
+
+	loadSpacesData() {
+		this.fetchSpaceData();
+	}
+
+	loadEntriesData() {
+		this.fetchEntryData();
+	}
+
 	loadAssetsData() {
-		// this.setState({
-		// 	activeTab: 'assets',
-		// });
 		this.fetchAssetData();
+	}
+
+	fetchUserData() {
+		fetch('/users/4FLrUHftHW3v2BLi9fzfjU').then(response => {
+			response.json().then(user => {
+				this.setState({
+				user: user,
+				});
+			});
+		});
+	}
+
+	loadUserData() {
+		this.fetchUserData();
 	}
 
 	renderData() {
@@ -74,7 +94,9 @@ export default class MyFirstTab extends Component {
 	render() {
 		return (
 			<div>
-				<h1> My First Space</h1>
+				<div>
+					<h1>{this.props.spaces.fields.title}</h1>created by {this.props.spaces.sys.createdBy}
+				</div>
 				<header>
 					<button onClick={this.loadEntriesData}>Entries</button>
 					<button onClick={this.loadAssetsData}>Assets</button>
@@ -84,47 +106,3 @@ export default class MyFirstTab extends Component {
 		);
 	}
 }
-
-	// loadEntriesData() {
-	// 	this.setState({
-	// 		tabShowing: 'entries',
-	// 	});
-	// }
-	
-	// loadBeaconData() {
-	// 	this.setState({
-	// 		tabShowing: 'beacon',
-	// 	});
-	// }
-	
-	// render() {
-	// 	const dataToRender = this.state.tabShowing === 'entries' ? this.state.sensorData : this.state.beaconData;
-	// 	const renderedData = dataToRender.map((sensor) => {
-	// 		return (
-	// 			<tr>
-	// 				<td>{sensor.name}</td>
-	// 				<td>{sensor.data}</td>
-	// 			</tr>
-	// 		);
-	// 	});
-	// 	return (
-	// 		<div>
-	// 			<header>
-	// 				<button onClick={this.loadEntriesData}>Sensors</button>
-	// 				<button onClick={this.loadBeaconData}>Beacon</button>
-	// 			</header>
-	// 			<table>
-	// 				<thead>
-	// 					<tr>
-	// 						<th>Name</th>
-	// 						<th>Data</th>
-	// 					</tr>
-	// 				</thead>
-	// 				<tbody>
-	// 					{renderedData}
-	// 				</tbody>
-	// 			</table>
-	// 		</div>	
-	// 	);
-	// }
-// }

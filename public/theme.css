@@ -27,7 +27,7 @@ ul {
   color: rebeccapurple;
 }
 
-.tabs__content {
+.tabs-content {
   float: right;
   padding: 2em;
   background: #eee;
@@ -36,7 +36,7 @@ ul {
   overflow: hidden;
 }
 
-.tabs__labels {
+.tabs-labels {
   
   float: left;
   width: 20%;
