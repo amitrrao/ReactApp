@@ -1,26 +1,37 @@
 import React from 'react';
 import Entry from './entryComponent';
+import ReactTable from 'react-table';
+import "react-table/react-table.css";
 
 export default class EntryList extends React.Component{
 	render() {
-		var entries = this.props.entries.map(entry =>	
-			<Entry entry={entry}/>
-		);
+
+		const entryColumns = [{
+		    Header: 'Title',
+		    accessor: 'fields.title'
+		  }, {
+		    Header: 'Summary',
+		    accessor: 'fields.summary',
+		  }, {
+		    Header: 'Created By',
+		    accessor: 'sys.createdBy'
+		  }, 
+		  {
+		    Header: 'Updated By',
+		    accessor: 'sys.updatedBy'
+		  }, {
+		    Header: 'Last Updated',
+		    accessor: 'sys.updatedAt'
+		  }]
+
 		return (
-			<table>
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Id</th>
-						<th>CreatedBy</th>
-						<th>UpdatedBy</th>
-						<th>LastUpdated</th>
-					</tr>
-				</thead>
-				<tbody>
-					{entries}
-				</tbody>
-			</table>
+			<ReactTable
+			    data={this.props.entries}
+			    columns={entryColumns}
+			    minRows={1}
+			    sortable={true}
+		  	/>
+
 		)
 	}
 }

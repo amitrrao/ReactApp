@@ -1,27 +1,41 @@
 import React from 'react';
-import Asset from './assetComponent';
+import Entry from './entryComponent';
+import ReactTable from 'react-table';
+import "react-table/react-table.css";
 
 export default class AssetList extends React.Component{
 	render() {
-		var assets = this.props.assets.map(asset =>	
-			<Asset asset={asset}/>
-		);
+
+		const assetColumns = [{
+		    Header: 'Title',
+		    accessor: 'fields.title'
+		  }, {
+		    Header: 'Content Type',
+		    accessor: 'fields.contentType',
+		  }, {
+		    Header: 'File Name',
+		    accessor: 'fields.fileName'
+		  },
+		  {
+		    Header: 'Created By',
+		    accessor: 'sys.createdBy'
+		  }, 
+		  {
+		    Header: 'Updated By',
+		    accessor: 'sys.updatedBy'
+		  }, {
+		    Header: 'Last Updated',
+		    accessor: 'sys.updatedAt'
+		  }]
+
 		return (
-			<table>
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>ContentType</th>
-						<th>FileName</th>
-						<th>CreatedBy</th>
-						<th>UpdatedBy</th>
-						<th>LastUpdated</th>
-					</tr>
-				</thead>
-				<tbody>
-					{assets}
-				</tbody>
-			</table>
+			<ReactTable
+			    data={this.props.assets}
+			    columns={assetColumns}
+			    minRows={1}
+			    sortable={true}
+		  	/>
+
 		)
 	}
 }

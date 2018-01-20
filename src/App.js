@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
-import Header from './components/headerComponent/header';
-import MyCustomTabs from './components/myTabs/myCustomTabs';
-import Tabs from './components/myTabs/tabs';
-import Tab from './components/myTabs/tab';
+import Tabs from './components/tabComponent/tabs';
 
-class App extends Component {
-  render() {
-	  this.props.selected
-    return (
-      <div className="App">
-        <Header />
-		<MyBasicTabs />
-		<Tabs />
-		<Tab />
-      </div>
-    );
-  }
+export const App = (props) => {
+  return (
+    <Tabs selected={props.firstSelect || '1'} />
+  );
 }
 
 export default App;

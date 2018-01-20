@@ -27,19 +27,21 @@ ul {
   color: rebeccapurple;
 }
 
-.tabs__content {
+.tabs-content {
   float: right;
   padding: 2em;
   background: #eee;
   width: 80%;
-  height: 50vh;
   overflow: hidden;
 }
 
-.tabs__labels {
+.tabs-labels {
   
   float: left;
   width: 20%;
   height: 50vh;
+}
 
+h1 {
+  display: inline-block;
 }

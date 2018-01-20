@@ -6,19 +6,10 @@ export default class MyFirstTab extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
 			activeTab: 'entries',
 			entries:[],
 			assets: [],
-			// tabShowing: 'sensors',
-			// sensorData: [{
-			// 	name: 'sensor 1',
-			// 	data: 'Some data',
-			// }],
-			// beaconData: [{
-			// 	name: 'beacon 1',
-			// 	data: 'beacon data',
-			// }],
+			errorState: false,
 		};	
 		
 		this.loadEntriesData = this.loadEntriesData.bind(this);
@@ -37,7 +28,12 @@ export default class MyFirstTab extends Component {
 				entries: entries,
 				});
 			});
-		});
+		}).catch(() => {
+			this.setState({
+				errorState: true,
+	        })
+			console.log("error");
+    	});
 	}
 
 	loadEntriesData() {
@@ -56,13 +52,13 @@ export default class MyFirstTab extends Component {
 	}
 
 	loadAssetsData() {
-		// this.setState({
-		// 	activeTab: 'assets',
-		// });
 		this.fetchAssetData();
 	}
 
 	renderData() {
+		if (this.state.errorState) {
+			return (<div>Space not setup yet!</div>);
+		}
 		if (this.state.activeTab === 'entries'){
 			return (<EntryList entries={this.state.entries} />);
 		}
@@ -74,7 +70,9 @@ export default class MyFirstTab extends Component {
 	render() {
 		return (
 			<div>
-				<h1> My First Space</h1>
+				<div>
+					<h1>{this.props.spaces.fields.title}</h1> {this.props.spaces.sys.createdBy}
+				</div>
 				<header>
 					<button onClick={this.loadEntriesData}>Entries</button>
 					<button onClick={this.loadAssetsData}>Assets</button>
@@ -84,47 +82,3 @@ export default class MyFirstTab extends Component {
 		);
 	}
 }
-
-	// loadEntriesData() {
-	// 	this.setState({
-	// 		tabShowing: 'entries',
-	// 	});
-	// }
-	
-	// loadBeaconData() {
-	// 	this.setState({
-	// 		tabShowing: 'beacon',
-	// 	});
-	// }
-	
-	// render() {
-	// 	const dataToRender = this.state.tabShowing === 'entries' ? this.state.sensorData : this.state.beaconData;
-	// 	const renderedData = dataToRender.map((sensor) => {
-	// 		return (
-	// 			<tr>
-	// 				<td>{sensor.name}</td>
-	// 				<td>{sensor.data}</td>
-	// 			</tr>
-	// 		);
-	// 	});
-	// 	return (
-	// 		<div>
-	// 			<header>
-	// 				<button onClick={this.loadEntriesData}>Sensors</button>
-	// 				<button onClick={this.loadBeaconData}>Beacon</button>
-	// 			</header>
-	// 			<table>
-	// 				<thead>
-	// 					<tr>
-	// 						<th>Name</th>
-	// 						<th>Data</th>
-	// 					</tr>
-	// 				</thead>
-	// 				<tbody>
-	// 					{renderedData}
-	// 				</tbody>
-	// 			</table>
-	// 		</div>	
-	// 	);
-	// }
-// }

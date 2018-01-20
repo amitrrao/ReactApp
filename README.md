@@ -2,7 +2,7 @@
 
 ### Description
 
-This is an exercise for developing a UI application using React.
+This is an exercise for developing a UI application using React. It is built using the create-react-app starter project.
 
 ### System Requirements
 * [Node](https://nodejs.org/en/download/)
