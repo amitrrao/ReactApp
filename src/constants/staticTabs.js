@@ -1,15 +1,15 @@
 
 export const staticTabs = [
 	{
-		name: 'My First Store',
+		name: 'My First Space',
 		id: '',
 	},
 	{
-		name: 'My Second Store',
+		name: 'My Second Space',
 		id: '1',
 	},
 	{
-		name: 'My Third Store',
+		name: 'My Third Space',
 		id: '2',
 	}
 ];

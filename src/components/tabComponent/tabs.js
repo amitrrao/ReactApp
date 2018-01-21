@@ -13,10 +13,34 @@ class Tabs extends React.Component {
 			fields: {},
 			sys: {},
 	 	},
+	 	users: [{
+	 		id: '',
+	 		name: '',
+	 	}],
 	};
 
 	this.handleClick = this.handleClick.bind(this);
+	this.loadUsersData = this.loadUsersData.bind(this);
   }
+
+	loadUsersData() {
+		this.fetchUserData();
+	}
+
+	fetchUserData() {
+		fetch('/users').then(response => {
+			response.json().then(users => {
+
+				var userIdNames = users.map(user => 
+					({id: user.sys.id, name: user.fields.name}
+						));
+		    	
+				this.setState({
+				users: userIdNames,
+				});
+			});
+		});
+	}
 
 	handleClick(id, event) {
 		event.preventDefault();
@@ -33,6 +57,7 @@ class Tabs extends React.Component {
 				});
 			});
 		});
+		this.loadUsersData();
 	}
 
 	renderTitles(selected, handleClick) {
@@ -56,7 +81,7 @@ class Tabs extends React.Component {
 					{this.renderTitles(this.state.selected, this.handleClick)}
 				</ul>       
 				<div className="tabs-content">
-					<MyFirstTab spaces={this.state.spaces}/>
+					<MyFirstTab spaces={this.state.spaces} users={this.state.users} spaceId={this.state.spaceId}/>
 				</div>
 			</div>
 		);

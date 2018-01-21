@@ -1,5 +1,4 @@
 import React from 'react';
-import Entry from './entryComponent';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 
@@ -15,7 +14,7 @@ export default class EntryList extends React.Component{
 		  }, {
 		    Header: 'Created By',
 		    accessor: 'sys.createdBy'
-		  }, 
+		  },
 		  {
 		    Header: 'Updated By',
 		    accessor: 'sys.updatedBy'
@@ -31,7 +30,6 @@ export default class EntryList extends React.Component{
 			    minRows={1}
 			    sortable={true}
 		  	/>
-
 		)
 	}
 }
