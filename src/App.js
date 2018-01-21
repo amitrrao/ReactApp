@@ -3,7 +3,8 @@ import Tabs from './components/tabComponent/tabs';
 
 export const App = (props) => {
   return (
-    <Tabs selected={props.firstSelect || '1'} />
+  	 <Tabs selected={props.firstSelect || ''} spaceId={props.match.params.spaceId} />
+
   );
 }
 

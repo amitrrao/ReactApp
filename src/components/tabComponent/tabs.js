@@ -4,10 +4,11 @@ import {staticTabs as tabs} from '../../constants/staticTabs';
 
 class Tabs extends React.Component {
   constructor(props) {
-	super(props);  
-
+  	super(props);  
+	
 	this.state = { 
 		selected: this.props.selected,
+		spaceId: this.props.spaceId,
 		spaces: {
 			fields: {},
 			sys: {},
@@ -19,7 +20,11 @@ class Tabs extends React.Component {
 
 	handleClick(id, event) {
 		event.preventDefault();
-		fetch("/spaces/yadj1kx9rmg0" + id).then(response => {
+		let fetchUrl = "/spaces/yadj1kx9rmg0";
+		if(this.state.spaceId) {
+			fetchUrl = "/spaces/" + this.state.spaceId;
+		}
+		fetch(fetchUrl).then(response => {
 			response.json().then(spaces => {
 				console.log(spaces);
 				this.setState({
