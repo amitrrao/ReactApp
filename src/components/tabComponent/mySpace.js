@@ -3,11 +3,11 @@ import EntryList from '../itemComponent/entryListComponent';
 import AssetList from '../itemComponent/assetListComponent';
 
 /*
-	This is the MyFirstTab component which is called from the 'Tabs' component.
-	This component is responsible for loading a given 'Tab' a.k.a space by calling
+	This is the MySpace component which is called from the 'Spaces' component.
+	This component is responsible for loading a given 'Space' a.k.a space by calling
 	the loadEntriesData() and loadAssetsData() methods.
 */
-export default class MyFirstTab extends Component {
+export default class MySpace extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

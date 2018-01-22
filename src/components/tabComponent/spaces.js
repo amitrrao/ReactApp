@@ -1,15 +1,15 @@
 import React from 'react';
-import MyFirstTab from './MyFirstTab';
-import {staticTabs as tabs} from '../../constants/staticTabs';
+import MySpace from './mySpace';
+import {staticSpaces as spaces} from '../../constants/staticSpaces';
 
 /*
-	This is our main 'Tabs' component. This component loads a list of spaces on initialization.
+	This is our main 'Spaces' component. This component loads a list of spaces on initialization.
 	In its render() method, it first calls the renderTitles() method by passing it an initial 
-	selected Tab and a handleClick() callback method. It then calls the MyFirstTab component by
+	selected Space and a handleClick() callback method. It then calls the MyFirstTab component by
 	passing it a list of spaces, users and a spaceId as props.
 */
 
-class Tabs extends React.Component {
+class Spaces extends React.Component {
 	constructor(props) {
 	super(props);
 	
@@ -77,13 +77,13 @@ class Tabs extends React.Component {
 	}
 
 	renderTitles(selected, handleClick) {
-		return tabs.map(function(tab, idx) {
-			const handler = handleClick.bind(this, tab.id);
-			let activeClass = (selected === tab.id ? 'is-active' : '');
+		return spaces.map(function(space, idx) {
+			const handler = handleClick.bind(this, space.id);
+			let activeClass = (selected === space.id ? 'is-active' : '');
 			return (
-				<li role="tab" key={tab.id}>
+				<li role="space" key={space.id}>
 					<button className={activeClass} onClick={handler}>
-						{tab.name}
+						{space.name}
 					</button>
 				</li>
 			);
@@ -100,11 +100,11 @@ class Tabs extends React.Component {
 					{this.renderTitles(this.state.selected, this.handleClick)}
 				</ul>       
 				<div className="tabs-content">
-					<MyFirstTab spaces={this.state.spaces} users={this.state.users} spaceId={this.state.spaceId}/>
+					<MySpace spaces={this.state.spaces} users={this.state.users} spaceId={this.state.spaceId}/>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default Tabs;
+export default Spaces;

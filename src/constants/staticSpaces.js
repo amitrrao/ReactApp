@@ -2,7 +2,7 @@
 /*
 	This is a static list of tabs.
 */
-export const staticTabs = [
+export const staticSpaces = [
 	{
 		name: 'My First Space',
 		id: '',
