@@ -4,6 +4,9 @@
 
 This is an exercise for developing a UI application using React. It is built using the create-react-app starter project.
 
+This application makes REST calls to a server. You can use the [my-spaces-api](https://bitbucket.org/amitrrao/my-spaces-api) application from my BitBucket repo.
+
+
 ### System Requirements
 * [Node](https://nodejs.org/en/download/)
 
