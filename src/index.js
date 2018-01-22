@@ -6,8 +6,10 @@ import {Redirect, BrowserRouter, Route} from 'react-router-dom';
 
 registerServiceWorker();
 
+/*
+	This is the entry point into the application. In the render() method, we call our App component.
+*/
 ReactDOM.render((
-
 	<BrowserRouter>
 		<div>
 			<Route exact path="/spaceexplorer" component={App}/>

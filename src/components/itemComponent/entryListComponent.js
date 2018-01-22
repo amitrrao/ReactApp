@@ -2,6 +2,9 @@ import React from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 
+/*
+	This is the EntryList component which defines a table with column headers.
+*/
 export default class EntryList extends React.Component{
 	render() {
 

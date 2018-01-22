@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import EntryList from '../itemComponent/entryListComponent';
 import AssetList from '../itemComponent/assetListComponent';
 
+/*
+	This is the MyFirstTab component which is called from the 'Tabs' component.
+	This component is responsible for loading a given 'Tab' a.k.a space by calling
+	the loadEntriesData() and loadAssetsData() methods.
+*/
 export default class MyFirstTab extends Component {
 	constructor(props) {
 		super(props);
@@ -43,16 +48,15 @@ export default class MyFirstTab extends Component {
 				});
 
 				this.setState({
-				activeTab: 'entries', 
-				entries: entries,
+					activeTab: 'entries', 
+					entries: entries,
 				});
+			}).catch(() => {
+				this.setState({
+					errorState: true,
+				})
 			});
-		}).catch(() => {
-			this.setState({
-				errorState: true,
-	        })
-			console.log("error");
-    	});
+		});
 	}
 
 	loadEntriesData() {
@@ -77,11 +81,14 @@ export default class MyFirstTab extends Component {
 					}
 					return asset;
 				});
-
 				this.setState({
-				activeTab: 'assets', 
-				assets: assets,
+					activeTab: 'assets', 
+					assets: assets,
 				});
+			}).catch(() => {
+				this.setState({
+					errorState: true,
+				})
 			});
 		});
 	}
@@ -92,7 +99,7 @@ export default class MyFirstTab extends Component {
 
 	renderData() {
 		if (this.state.errorState) {
-			return (<div>Space not setup yet!</div>);
+			return (<div>Space is not available. Please make sure the server is running.</div>);
 		}
 		if (this.state.activeTab === 'entries'){
 			return (<EntryList entries={this.state.entries} />);

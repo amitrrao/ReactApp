@@ -2,26 +2,34 @@ import React from 'react';
 import MyFirstTab from './MyFirstTab';
 import {staticTabs as tabs} from '../../constants/staticTabs';
 
+/*
+	This is our main 'Tabs' component. This component loads a list of spaces on initialization.
+	In its render() method, it first calls the renderTitles() method by passing it an initial 
+	selected Tab and a handleClick() callback method. It then calls the MyFirstTab component by
+	passing it a list of spaces, users and a spaceId as props.
+*/
+
 class Tabs extends React.Component {
-  constructor(props) {
-  	super(props);  
+	constructor(props) {
+	super(props);
 	
 	this.state = { 
 		selected: this.props.selected,
 		spaceId: this.props.spaceId,
+		errorState: false,
 		spaces: {
 			fields: {},
 			sys: {},
-	 	},
-	 	users: [{
-	 		id: '',
-	 		name: '',
-	 	}],
+		},
+		users: [{
+			id: '',
+			name: '',
+		}],
 	};
 
 	this.handleClick = this.handleClick.bind(this);
 	this.loadUsersData = this.loadUsersData.bind(this);
-  }
+	}
 
 	loadUsersData() {
 		this.fetchUserData();
@@ -32,12 +40,17 @@ class Tabs extends React.Component {
 			response.json().then(users => {
 
 				var userIdNames = users.map(user => 
-					({id: user.sys.id, name: user.fields.name}
-						));
-		    	
+					({
+						id: user.sys.id, 
+						name: user.fields.name
+					}));	
 				this.setState({
-				users: userIdNames,
+					users: userIdNames,
 				});
+			}).catch(() => {
+				this.setState({
+					errorState: true,
+				})
 			});
 		});
 	}
@@ -50,12 +63,15 @@ class Tabs extends React.Component {
 		}
 		fetch(fetchUrl).then(response => {
 			response.json().then(spaces => {
-				console.log(spaces);
 				this.setState({
 					spaces: spaces,
 					selected: id,
 				});
 			});
+		}).catch(() => {
+			this.setState({
+				errorState: true,
+			})
 		});
 		this.loadUsersData();
 	}
@@ -66,7 +82,7 @@ class Tabs extends React.Component {
 			let activeClass = (selected === tab.id ? 'is-active' : '');
 			return (
 				<li role="tab" key={tab.id}>
-					<button className={activeClass}  onClick={handler}>
+					<button className={activeClass} onClick={handler}>
 						{tab.name}
 					</button>
 				</li>
@@ -75,6 +91,9 @@ class Tabs extends React.Component {
 	}
 
 	render() {
+		if (this.state.errorState) {
+			return (<div>Space is not available. Please make sure the server is running.</div>);
+		}
 		return (
 			<div className="tabs">
 				<ul className="tabs-labels" role="tablist">

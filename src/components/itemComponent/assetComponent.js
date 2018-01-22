@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+	This is our Asset component which defines the fields for an Asset.
+*/
 export default class Asset extends React.Component{
 	render() {
 		return (
@@ -15,6 +18,7 @@ export default class Asset extends React.Component{
 	}
 }
 
+// Set the default props to be an empty object.
 Asset.defaultProps = {
 	assets: {
 		fields: {},

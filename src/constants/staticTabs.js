@@ -1,4 +1,7 @@
 
+/*
+	This is a static list of tabs.
+*/
 export const staticTabs = [
 	{
 		name: 'My First Space',
@@ -11,5 +14,5 @@ export const staticTabs = [
 	{
 		name: 'My Third Space',
 		id: '2',
-	}
+	},
 ];

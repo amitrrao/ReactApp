@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+	This is our Entry component which defines the fields for an Entry.
+*/
 export default class Entry extends React.Component{
 	render() {
 		return (
@@ -14,6 +17,7 @@ export default class Entry extends React.Component{
 	}
 }
 
+// Set the default props to be an empty object.
 Entry.defaultProps = {
 	entries: {
 		fields: {},

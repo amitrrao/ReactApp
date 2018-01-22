@@ -2,6 +2,9 @@ import React from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 
+/*
+	This is the AssetList component which defines a table with column headers.
+*/
 export default class AssetList extends React.Component{
 	render() {
 
